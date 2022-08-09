@@ -14,7 +14,7 @@ public class CameraMovement : MonoBehaviour
 
     void LateUpdate()
     {
-        Vector3 newPos = Vector3.Lerp(transform.position, _target.position + _offset, 0.04f);
+        Vector3 newPos = Vector3.Lerp(transform.position, _target.position + _offset, 0.05f);
         transform.position = newPos;
     }
 }

@@ -1,12 +1,11 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerBall : MonoBehaviour
 {
     public event Action LevelFailedAction;
     public event Action LevelCompletedAction;
+    public event Action FloorPassedAction;
 
     [SerializeField] private Rigidbody _playerBallRB;
     [SerializeField] private float _jumpForce;
@@ -18,15 +17,24 @@ public class PlayerBall : MonoBehaviour
 
         if(materialName == "SaveMat (Instance)")
         {
-
+            SoundManager.Instance.JumpSound();
         }
         else if (materialName == "UnSaveMat (Instance)")
         {
             LevelFailedAction?.Invoke();
+            SoundManager.Instance.DeathSound();
         }
         else if(materialName == "FinishMaterial (Instance)")
         {
             LevelCompletedAction?.Invoke();
+            SoundManager.Instance.FinishSound();
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "FloorTrigger")
+        {
+            FloorPassedAction?.Invoke();
         }
     }
 }
