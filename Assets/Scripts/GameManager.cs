@@ -6,7 +6,6 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-  //  public static GameManager Instance => _instance;
     public int StartCountHelix => _startCountHelix + _currentLevelIndex;
     public  int NumberOfPassedHelix => _numberOfPassedHelixs;
     public int ScoreCashIndex => _scoreCash;
@@ -26,15 +25,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text _nextLevelText;
     [SerializeField] private Slider _progressLevelSlider;
 
-   // private static GameManager _instance;
-
     public  int _currentLevelIndex = 0;
     private  int _numberOfPassedHelixs;
 
     private int _startCountHelix = 5;
     private int _scoreCash;
-
-    //private Vector3 posBall = new Vector3(0, 9.5f, -1.95f);
 
     private void Awake()
     {
@@ -49,7 +44,7 @@ public class GameManager : MonoBehaviour
         _nextLevelGame.onClick.AddListener(NextLevelOnClick);
         _levelGenerator.PrepareLevel(_startCountHelix + _currentLevelIndex);
     }
-    public void Start()
+    public void StartGame()
     {
         Time.timeScale = 1f;
         _numberOfPassedHelixs = 0;
@@ -67,7 +62,11 @@ public class GameManager : MonoBehaviour
     {
         if (_isGameOver)
         {
+            ResetSlider();
             _levelGenerator.ClearLevel();
+            _levelGenerator.PrepareLevel(_startCountHelix + _currentLevelIndex);
+            _playerBall.ResetPosition();
+            DestroyRestartUI();
         }
     }
 
@@ -77,10 +76,12 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("CurrentLevelIndex", _currentLevelIndex);
         if (_isLevelComplited)
         {
+            ResetSlider();
             _levelGenerator.ClearLevel();
-
-            //SceneManager.LoadScene("Level1");
+            _levelGenerator.PrepareLevel(_startCountHelix + _currentLevelIndex);
+            _playerBall.ResetPosition();
             PlayerPrefs.SetInt("ScoreCash", _scoreCash + 5);
+            DestroyNextLevelGameUI();
         }
     }
 
@@ -92,7 +93,12 @@ public class GameManager : MonoBehaviour
         float progress = (float)_numberOfPassedHelixs * 1 / (float)StartCountHelix;
         _progressLevelSlider.value = progress;
         UpdateScoreAction?.Invoke();
+    }
 
+    public void ResetSlider()
+    {
+        _numberOfPassedHelixs = 0;
+        _progressLevelSlider.value = 0f;
     }
     public void RestartGameUI()
     {
@@ -101,12 +107,37 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         _gameOverPanel.SetActive(true);
     }
+
+    public void DestroyRestartUI()
+    {
+        _isGameOver = false;
+
+        Time.timeScale = 1f;
+        _gameOverPanel.SetActive(false);
+    }
     public void NextLevelGameUI()
     {
-
         _isLevelComplited = true;
 
         Time.timeScale = 0f;
         _nextLevelPanel.SetActive(true);
+    }
+
+    public void DestroyNextLevelGameUI()
+    {
+        _isLevelComplited = false;
+
+        Time.timeScale = 1f;
+        _nextLevelPanel.SetActive(false);
+    }
+
+    public void SetColor(ColorType colorType)
+    {
+        _playerBall.SetColorType(colorType);
+    }
+    public void AddCash(int amount)
+    {
+        _scoreCash -= amount;
+        PlayerPrefs.SetInt("ScoreCash", _scoreCash + 5);
     }
 }

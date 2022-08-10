@@ -3,12 +3,16 @@ using UnityEngine;
 
 public class PlayerBall : MonoBehaviour
 {
+    public Material MyMaterial => _myMaterial;
     public event Action LevelFailedAction;
     public event Action LevelCompletedAction;
     public event Action FloorPassedAction;
 
     [SerializeField] private Rigidbody _playerBallRB;
     [SerializeField] private float _jumpForce;
+    [SerializeField] private Material _myMaterial;
+
+    private Vector3 posBall = new Vector3(0, 1.6f, -1.95f);
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -35,6 +39,33 @@ public class PlayerBall : MonoBehaviour
         if(other.tag == "FloorTrigger")
         {
             FloorPassedAction?.Invoke();
+        }
+    }
+
+    public void ResetPosition()
+    {
+        transform.position = posBall;
+    }
+
+    public void SetColorType(ColorType colorType)
+    {
+        switch(colorType)
+        {
+            case ColorType.Standart_Color:
+                _myMaterial.color = Color.yellow;
+                break;
+
+            case ColorType.Green_Color:
+                _myMaterial.color = Color.green;
+                break;
+
+            case ColorType.Blue_Color:
+                _myMaterial.color = Color.blue;
+                break;
+
+            case ColorType.Black_Color:
+                _myMaterial.color = Color.black;
+                break;
         }
     }
 }
