@@ -7,9 +7,15 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private float _distanceHelix = 6f;
     [SerializeField] private float _ySpawn = 0;
 
+    [SerializeField] private float _rotationHelix;
+
     private GameObject[] _go;
     private int _numberHelix;
 
+    private void Update()
+    {
+        //gameObject.transform.Rotate(0, _rotationHelix * Time.deltaTime, 0);
+    }
     public void PrepareLevel(int floorCount)
     {
         _ySpawn = 0f;

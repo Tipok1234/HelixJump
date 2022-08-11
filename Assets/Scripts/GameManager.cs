@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
 
     private void NextLevelOnClick()
     {
+        _scoreCash += 5;
         _currentLevelIndex++;
         PlayerPrefs.SetInt("CurrentLevelIndex", _currentLevelIndex);
         if (_isLevelComplited)
@@ -80,7 +81,7 @@ public class GameManager : MonoBehaviour
             _levelGenerator.ClearLevel();
             _levelGenerator.PrepareLevel(_startCountHelix + _currentLevelIndex);
             _playerBall.ResetPosition();
-            PlayerPrefs.SetInt("ScoreCash", _scoreCash + 5);
+          //  PlayerPrefs.SetInt("ScoreCash", _scoreCash + 5);
             DestroyNextLevelGameUI();
         }
     }

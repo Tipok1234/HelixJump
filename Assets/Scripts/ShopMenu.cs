@@ -47,6 +47,6 @@ public class ShopMenu : MonoBehaviour
     }
     private void OnItemSelect(ColorType colorType)
     {
-        Debug.LogError("Select!");
+        _gameManager.SetColor(colorType);
     }
 }

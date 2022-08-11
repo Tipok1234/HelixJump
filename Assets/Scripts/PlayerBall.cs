@@ -66,6 +66,14 @@ public class PlayerBall : MonoBehaviour
             case ColorType.Black_Color:
                 _myMaterial.color = Color.black;
                 break;
+
+            case ColorType.Red_Color:
+                _myMaterial.color = Color.red;
+                break;
+
+            case ColorType.Purple_Color:
+                _myMaterial.color = Color.magenta;
+                break;
         }
     }
 }
