@@ -1,14 +1,11 @@
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 using System;
-using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public int StartCountHelix => _startCountHelix + _currentLevelIndex;
     public  int NumberOfPassedHelix => _numberOfPassedHelixs;
-    public int ScoreCashIndex => _scoreCash;
 
     public static bool _isGameOver;
     public static bool _isLevelComplited;
@@ -19,30 +16,24 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LevelGenerator _levelGenerator;
     [SerializeField] private GameObject _gameOverPanel;
     [SerializeField] private GameObject _nextLevelPanel;
-    [SerializeField] private Button _restartGame;
-    [SerializeField] private Button _nextLevelGame;
-    [SerializeField] private TMP_Text _currentLevelText;
-    [SerializeField] private TMP_Text _nextLevelText;
+    [SerializeField] private DataManager _dataManager;
     [SerializeField] private Slider _progressLevelSlider;
 
-    public  int _currentLevelIndex = 0;
+    private  int _currentLevelIndex = 0;
     private  int _numberOfPassedHelixs;
 
     private int _startCountHelix = 5;
-    private int _scoreCash;
 
     private void Awake()
     {
-        _currentLevelIndex = PlayerPrefs.GetInt("CurrentLevelIndex", 1);
-        _scoreCash = PlayerPrefs.GetInt("ScoreCash", 1);
+        _dataManager.CurrencyUpdatedAction += OnCurrencyUpdated;
+        _dataManager.LevelUpdatedAction += OnLevelUpdated;
+        _dataManager.DataLodedAction += OnDataLoaded;
+
 
         _playerBall.LevelCompletedAction += NextLevelGameUI;
         _playerBall.LevelFailedAction += RestartGameUI;
         _playerBall.FloorPassedAction += UpdateSlider;
-
-        _restartGame.onClick.AddListener(RestartOnClick);
-        _nextLevelGame.onClick.AddListener(NextLevelOnClick);
-        _levelGenerator.PrepareLevel(_startCountHelix + _currentLevelIndex);
     }
     public void StartGame()
     {
@@ -50,15 +41,23 @@ public class GameManager : MonoBehaviour
         _numberOfPassedHelixs = 0;
         _isGameOver = false;
         _isLevelComplited = false;
+        _levelGenerator.PrepareLevel(_startCountHelix + _currentLevelIndex);
         StartGameAction?.Invoke();
     }
-
-    private void Update()
+    private void OnCurrencyUpdated(int currency)
     {
-        _currentLevelText.text = _currentLevelIndex.ToString();
-        _nextLevelText.text = (_currentLevelIndex + 1).ToString();
+        
     }
-    private void RestartOnClick()
+    private void OnLevelUpdated(int level)
+    {
+        _currentLevelIndex = level;
+    }
+    private void OnDataLoaded()
+    {
+        _currentLevelIndex = _dataManager.CurrentLevelIndex;
+    }
+
+    public void RestartOnClick()
     {
         if (_isGameOver)
         {
@@ -70,26 +69,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void NextLevelOnClick()
+    public void NextLevelOnClick()
     {
-        _scoreCash += 5;
         _currentLevelIndex++;
-        PlayerPrefs.SetInt("CurrentLevelIndex", _currentLevelIndex);
+        _dataManager.IncriaseLevel();
         if (_isLevelComplited)
         {
             ResetSlider();
             _levelGenerator.ClearLevel();
             _levelGenerator.PrepareLevel(_startCountHelix + _currentLevelIndex);
             _playerBall.ResetPosition();
-          //  PlayerPrefs.SetInt("ScoreCash", _scoreCash + 5);
+            _dataManager.AddCurrency(1);
             DestroyNextLevelGameUI();
         }
     }
 
     private void UpdateSlider()
     {
-        _scoreCash++;
-       // PlayerPrefs.SetInt("ScoreCash", _scoreCash);
+        _dataManager.AddCurrency(1);
         _numberOfPassedHelixs++;
         float progress = (float)_numberOfPassedHelixs * 1 / (float)StartCountHelix;
         _progressLevelSlider.value = progress;
@@ -135,10 +132,5 @@ public class GameManager : MonoBehaviour
     public void SetColor(ColorType colorType)
     {
         _playerBall.SetColorType(colorType);
-    }
-    public void AddCash(int amount)
-    {
-        _scoreCash -= amount;
-        PlayerPrefs.SetInt("ScoreCash", _scoreCash + 5);
     }
 }

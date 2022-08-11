@@ -14,6 +14,7 @@ public class ShopUIItem : MonoBehaviour
     [SerializeField] private Button _buyButton;
     [SerializeField] private Button _selectButton;
     [SerializeField] private ColorType _colorType;
+
     private void Awake()
     {
         _buyButton.onClick.AddListener(BoughtItem);

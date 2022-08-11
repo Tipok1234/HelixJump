@@ -1,18 +1,17 @@
 using UnityEngine.UI;
 using UnityEngine;
 using System;
-using TMPro;
 
 public class ShopMenu : MonoBehaviour
 {
     public int Price => _price;
 
+    [SerializeField] private DataManager _dataManager;
     [SerializeField] private GameManager _gameManager;
     [SerializeField] private Canvas _shopMenuCanvas;
     [SerializeField] private Button _closeShopMenu;
     [SerializeField] private Button _buyButton;
 
-    [SerializeField] private TMP_Text _cash;
     [SerializeField] private ShopUIItem[] _shopUIItems;
 
     private int _price;
@@ -33,11 +32,10 @@ public class ShopMenu : MonoBehaviour
     
     private void OnItemBought(ColorType colorType, int price, Action callBack)
     {
-        if(_gameManager.ScoreCashIndex >= price)
+        if(_dataManager.HasCurrency(price))
         {
             _gameManager.SetColor(colorType);
-            _gameManager.AddCash(price);
-            _cash.text = _gameManager.ScoreCashIndex.ToString();
+            _dataManager.SubCurrency(price);
             callBack?.Invoke();
         }
         else

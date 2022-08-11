@@ -45,7 +45,7 @@ public class LevelGenerator : MonoBehaviour
         for (int i = 0; i < _go.Length; i++)
         {
             _go[i].SetActive(false);
-            Destroy(_go[i]);
+            //Destroy(_go[i]);
         }
     }
 }
