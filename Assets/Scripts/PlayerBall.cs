@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class PlayerBall : MonoBehaviour
 {
-    public Material MyMaterial => _myMaterial;
     public event Action LevelFailedAction;
     public event Action LevelCompletedAction;
     public event Action FloorPassedAction;

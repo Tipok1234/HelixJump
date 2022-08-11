@@ -14,12 +14,21 @@ public class GameCanvasUI : MonoBehaviour
     private void Awake()
     {
         _dataManager.LevelUpdatedAction += OnLevelUpdated;
-        _restartGame.onClick.AddListener(_gameManager.RestartOnClick);
-        _nextLevelGame.onClick.AddListener(_gameManager.NextLevelOnClick);
+        _restartGame.onClick.AddListener(RestartButton);
+        _nextLevelGame.onClick.AddListener(NextLevel);
     }
     private void OnLevelUpdated(int level)
     {
         _currentLevelText.text = level.ToString();
         _nextLevelText.text = (level + 1).ToString();
+    }
+
+    public void RestartButton()
+    {
+        _gameManager.RestartOnClick();
+    }
+    public void NextLevel()
+    {
+        _gameManager.NextLevelOnClick();
     }
 }

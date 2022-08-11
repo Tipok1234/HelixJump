@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using System;
 
@@ -8,11 +7,14 @@ public class DataManager : MonoBehaviour
     public int Currency => _currency;
     public int CurrentLevelIndex => _currentLevelIndex;
 
+    public Slider ProgressLevel => _progressLevelSlider;
+
     public event Action DataLodedAction;
     public event Action<int> LevelUpdatedAction;
     public event Action<int> CurrencyUpdatedAction;
 
     [SerializeField] private GameManager _gameManager;
+    [SerializeField] private Slider _progressLevelSlider;
 
 
     private const string _currentLevelKey = "CurrentLevelIndex";

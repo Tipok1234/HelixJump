@@ -289,7 +289,6 @@ MonoBehaviour:
   _gameOverPanel: {fileID: 333755260}
   _nextLevelPanel: {fileID: 1566281029}
   _dataManager: {fileID: 2066323022}
-  _progressLevelSlider: {fileID: 705059441}
 --- !u!4 &86930130
 Transform:
   m_ObjectHideFlags: 0
@@ -4530,7 +4529,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &1267739589
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5565,6 +5564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameManager: {fileID: 86930129}
+  _player: {fileID: 1267739588}
   _canvasOptionMenu: {fileID: 223076173}
   _playGameCanvas: {fileID: 1288769187}
   _shopCanvas: {fileID: 2097359440}
@@ -6572,6 +6572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameManager: {fileID: 86930129}
+  _progressLevelSlider: {fileID: 705059441}
 --- !u!4 &2066323023
 Transform:
   m_ObjectHideFlags: 0

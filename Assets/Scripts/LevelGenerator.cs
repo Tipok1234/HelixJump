@@ -29,7 +29,7 @@ public class LevelGenerator : MonoBehaviour
             else
                 SpawnHelix(Random.Range(1, _helixGeneration.Length - 1), i);
         }
-        SpawnHelix(_helixGeneration.Length - 1,floorCount -1); 
+        SpawnHelix(_helixGeneration.Length - 1,floorCount -1);
     }
 
     private void SpawnHelix(int helixIndex, int i)

@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _gameOverPanel;
     [SerializeField] private GameObject _nextLevelPanel;
     [SerializeField] private DataManager _dataManager;
-    [SerializeField] private Slider _progressLevelSlider;
 
     private  int _currentLevelIndex = 0;
     private  int _numberOfPassedHelixs;
@@ -79,7 +78,7 @@ public class GameManager : MonoBehaviour
             _levelGenerator.ClearLevel();
             _levelGenerator.PrepareLevel(_startCountHelix + _currentLevelIndex);
             _playerBall.ResetPosition();
-            _dataManager.AddCurrency(1);
+            _dataManager.AddCurrency(5);
             DestroyNextLevelGameUI();
         }
     }
@@ -89,14 +88,14 @@ public class GameManager : MonoBehaviour
         _dataManager.AddCurrency(1);
         _numberOfPassedHelixs++;
         float progress = (float)_numberOfPassedHelixs * 1 / (float)StartCountHelix;
-        _progressLevelSlider.value = progress;
+        _dataManager.ProgressLevel.value = progress;
         UpdateScoreAction?.Invoke();
     }
 
     public void ResetSlider()
     {
         _numberOfPassedHelixs = 0;
-        _progressLevelSlider.value = 0f;
+        _dataManager.ProgressLevel.value = 0f;
     }
     public void RestartGameUI()
     {
