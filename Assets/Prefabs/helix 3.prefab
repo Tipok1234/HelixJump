@@ -153,6 +153,10 @@ PrefabInstance:
       value: helix 3
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 46db0e421f22bef4fb807c7e77ded53c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46db0e421f22bef4fb807c7e77ded53c, type: 3}
       propertyPath: m_TagString
       value: FloorTrigger
       objectReference: {fileID: 0}
