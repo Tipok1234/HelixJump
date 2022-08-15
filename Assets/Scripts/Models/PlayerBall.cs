@@ -34,11 +34,11 @@ namespace Assets.Scripts.Models
                 SoundManager.Instance.DeathSound();
                 AddSplash();
             }
-            //else if (materialName == "DestroyMat (Instance)")
-            //{              
-            //    Debug.LogError("!!!!!");
-            //    AddSplash();
-            //}
+            else if (collision.transform.tag == "FloorDestroyTrigger")
+            {
+                Destroy(collision.gameObject);
+                AddSplash();
+            }
             else if (materialName == "FinishMaterial (Instance)")
             {
                 LevelCompletedAction?.Invoke();
