@@ -5,5 +5,4 @@ using Assets.Scripts.Enums;
 public class PlayerProfile 
 {
     public List<ColorType> _openedCollors = new List<ColorType>();
-
 }

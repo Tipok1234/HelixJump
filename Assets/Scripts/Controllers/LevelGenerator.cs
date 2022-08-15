@@ -23,14 +23,13 @@ namespace Assets.Scripts.Controllers
             _go = new GameObject[floorCount];
             _numberHelix = floorCount;
 
-            for (int i = 0; i < _numberHelix; i++)
+            SpawnHelix(0, 0);
+
+            for (int i = 1; i < _numberHelix - 1; i++)
             {
-                if (i == 0)
-                    SpawnHelix(0, i);
-                else
-                    SpawnHelix(Random.Range(1, _helixGeneration.Length - 1), i);
+                SpawnHelix(Random.Range(1, _helixGeneration.Length - 1), i);
             }
-            SpawnHelix(_helixGeneration.Length - 1, floorCount - 1);
+           SpawnHelix(_helixGeneration.Length - 1, floorCount - 1);
         }
 
         private void SpawnHelix(int helixIndex, int i)
@@ -45,9 +44,6 @@ namespace Assets.Scripts.Controllers
         {
             for (int i = 0; i < _go.Length; i++)
             {
-                //_go[i].SetActive(false);
-                // Destroy(_helixGeneration[i]);
-                //DestroyImmediate(_go[i], true);
                 Destroy(_go[i]);
             }
         }

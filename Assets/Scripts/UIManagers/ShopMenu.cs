@@ -44,10 +44,6 @@ namespace Assets.Scripts.UIManagers
                 _dataManager.OpenColor(colorType);
                 callBack?.Invoke();
             }
-            else
-            {
-                Debug.LogError("NO MONEY!");
-            }
         }
         private void OnItemSelect(ColorType colorType)
         {

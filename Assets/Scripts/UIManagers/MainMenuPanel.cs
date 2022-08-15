@@ -8,6 +8,7 @@ namespace Assets.Scripts.UIManagers
     {
         [SerializeField] private GameManager _gameManager;
         [SerializeField] private GameObject _player;
+
         [SerializeField] private Canvas _canvasOptionMenu;
         [SerializeField] private Canvas _playGameCanvas;
         [SerializeField] private Canvas _shopCanvas;

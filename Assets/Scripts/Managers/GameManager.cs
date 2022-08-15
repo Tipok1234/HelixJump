@@ -26,7 +26,6 @@ namespace Assets.Scripts.Managers
 
         private int _currentLevelIndex = 0;
         private int _numberOfPassedHelixs;
-
         private int _startCountHelix = 5;
 
         private void Awake()
@@ -56,8 +55,6 @@ namespace Assets.Scripts.Managers
             if (_isGameOver)
             {
                 ResetSlider();
-                //_levelGenerator.ClearLevel();
-                //_levelGenerator.PrepareLevel(_startCountHelix + _currentLevelIndex);
                 _playerBall.ResetPosition();
                 DestroyRestartUI();
             }

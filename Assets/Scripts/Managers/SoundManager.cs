@@ -7,9 +7,11 @@ namespace Assets.Scripts.Managers
     public class SoundManager : MonoBehaviour
     {
         public static SoundManager Instance => _instanceSound;
+
         [SerializeField] private AudioSource _jumpSound;
         [SerializeField] private AudioSource _deathSound;
         [SerializeField] private AudioSource _finishSound;
+
         private static SoundManager _instanceSound;
 
         private void Awake()
