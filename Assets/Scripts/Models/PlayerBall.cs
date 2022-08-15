@@ -14,9 +14,10 @@ namespace Assets.Scripts.Models
         [SerializeField] private Rigidbody _playerBallRB;
         [SerializeField] private float _jumpForce;
         [SerializeField] private Material _myMaterial;
+        [SerializeField] private GameObject _splash;
+     //   [SerializeField] private GameObject _destroyHel;
 
         private Vector3 posBall = new Vector3(0, 1.6f, -1.95f);
-
         private void OnCollisionEnter(Collision collision)
         {
             _playerBallRB.velocity = new Vector3(_playerBallRB.velocity.x, _jumpForce, _playerBallRB.velocity.z);
@@ -25,16 +26,24 @@ namespace Assets.Scripts.Models
             if (materialName == "SaveMat (Instance)")
             {
                 SoundManager.Instance.JumpSound();
+                AddSplash();
             }
             else if (materialName == "UnSaveMat (Instance)")
             {
                 LevelFailedAction?.Invoke();
                 SoundManager.Instance.DeathSound();
+                AddSplash();
             }
+            //else if (materialName == "DestroyMat (Instance)")
+            //{              
+            //    Debug.LogError("!!!!!");
+            //    AddSplash();
+            //}
             else if (materialName == "FinishMaterial (Instance)")
             {
                 LevelCompletedAction?.Invoke();
                 SoundManager.Instance.FinishSound();
+                AddSplash();
             }
         }
         private void OnTriggerEnter(Collider other)
@@ -77,7 +86,27 @@ namespace Assets.Scripts.Models
                 case ColorType.Purple_Color:
                     _myMaterial.color = Color.magenta;
                     break;
+
+                case ColorType.Orange_Color:
+                    _myMaterial.color = new Color(255f,101f,0f,255f);
+                    break;
+
+                case ColorType.Grey_Color:
+                    _myMaterial.color = Color.grey;
+                    break;
+
+                case ColorType.Clear_Color:
+                    _myMaterial.color = Color.white;
+                    break;
             }
+        }
+        private void AddSplash()
+        {
+            _splash.SetActive(true);
+            GameObject splash = Instantiate(_splash);
+            splash.transform.position = _playerBallRB.transform.position;
+            _splash.SetActive(false);
+            Destroy(splash, 0.3f);
         }
     }
 }

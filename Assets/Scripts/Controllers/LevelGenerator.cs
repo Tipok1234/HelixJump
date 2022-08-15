@@ -1,4 +1,5 @@
 using UnityEngine;
+using Assets.Scripts.Models;
 
 namespace Assets.Scripts.Controllers
 {
@@ -15,7 +16,7 @@ namespace Assets.Scripts.Controllers
 
         private void Update()
         {
-            gameObject.transform.Rotate(0, _rotationHelix * Time.deltaTime, 0);
+          //  gameObject.transform.Rotate(0, _rotationHelix * Time.deltaTime, 0);
         }
         public void PrepareLevel(int floorCount)
         {
