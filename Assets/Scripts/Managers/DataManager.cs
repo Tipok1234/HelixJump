@@ -14,6 +14,7 @@ namespace Assets.Scripts.Managers
         public event Action<int> CurrencyUpdatedAction;
 
         [SerializeField] private GameManager _gameManager;
+        private PlayerProfile _playerProfile;
 
         private const string _currentLevelKey = "CurrentLevelIndex";
         private const string _currencyKey = "CurrencyKey";
@@ -21,12 +22,12 @@ namespace Assets.Scripts.Managers
 
         private int _currency = 0;
         private int _currentLevelIndex = 0;
-        private PlayerProfile _playerProfile;
+
         private void Start()
         {
             LoadData();
         }
-        public void LoadData()
+        private void LoadData()
         {
             _playerProfile = SaveManager.Load<PlayerProfile>(_saveKey);
 

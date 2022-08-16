@@ -15,7 +15,6 @@ namespace Assets.Scripts.Models
         [SerializeField] private float _jumpForce;
         [SerializeField] private Material _myMaterial;
         [SerializeField] private GameObject _splash;
-     //   [SerializeField] private GameObject _destroyHel;
 
         private Vector3 posBall = new Vector3(0, 1.6f, -1.95f);
         private void OnCollisionEnter(Collision collision)
@@ -37,6 +36,7 @@ namespace Assets.Scripts.Models
             else if (collision.transform.tag == "FloorDestroyTrigger")
             {
                 Destroy(collision.gameObject);
+                SoundManager.Instance.JumpSound();
                 AddSplash();
             }
             else if (materialName == "FinishMaterial (Instance)")
@@ -100,7 +100,7 @@ namespace Assets.Scripts.Models
                     break;
             }
         }
-        private void AddSplash()
+        public void AddSplash()
         {
             _splash.SetActive(true);
             GameObject splash = Instantiate(_splash);

@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using Assets.Scripts.Models;
 using Assets.Scripts.Controllers;
+using DG.Tweening;
 
 namespace Assets.Scripts.Managers
 {
@@ -27,6 +28,7 @@ namespace Assets.Scripts.Managers
         private int _currentLevelIndex = 0;
         private int _numberOfPassedHelixs;
         private int _startCountHelix = 5;
+        private float slidingTime = 0.2f;
 
         private void Awake()
         {
@@ -77,10 +79,10 @@ namespace Assets.Scripts.Managers
 
         private void UpdateSlider()
         {
-            _dataManager.AddCurrency(1);
-            _numberOfPassedHelixs++;
+            _dataManager.AddCurrency(2);
+            _numberOfPassedHelixs++;        
             float progress = (float)_numberOfPassedHelixs * 1 / (float)StartCountHelix;
-            _gameCanvasUI.ProgressLevel.value = progress;
+            DOTween.To(() => _gameCanvasUI.ProgressLevel.value, x => _gameCanvasUI.ProgressLevel.value = x, progress, slidingTime);
             UpdateScoreAction?.Invoke();
         }
 

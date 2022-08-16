@@ -28,7 +28,7 @@ namespace Assets.Scripts.UIManagers
         {
             _canvasShopMenu.enabled = !_canvasShopMenu.enabled;
         }
-        public void Sound()
+        private void Sound()
         {
             AudioListener.pause = !AudioListener.pause;
         }

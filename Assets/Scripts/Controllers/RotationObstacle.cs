@@ -5,7 +5,7 @@ namespace Assets.Scripts.Controllers
     public class RotationObstacle : MonoBehaviour
     {
         [SerializeField] private float _rotationObstacle;
-        void Update()
+        private void Update()
         {
             if (Input.GetMouseButton(0))
             {

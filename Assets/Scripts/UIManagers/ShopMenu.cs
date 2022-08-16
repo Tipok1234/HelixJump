@@ -30,7 +30,7 @@ namespace Assets.Scripts.UIManagers
             }
             _closeShopMenu.onClick.AddListener(CloseMenu);
         }
-        public void CloseMenu()
+        private void CloseMenu()
         {
             _shopMenuCanvas.enabled = !_shopMenuCanvas.enabled;
         }

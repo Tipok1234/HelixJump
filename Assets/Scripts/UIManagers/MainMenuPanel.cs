@@ -25,18 +25,18 @@ namespace Assets.Scripts.UIManagers
             _openShopCanvas.onClick.AddListener(ShowShop);
         }
 
-        public void OpenOption()
+        private void OpenOption()
         {
             _canvasOptionMenu.enabled = !_canvasOptionMenu.enabled;
         }
-        public void PlayGame()
+        private void PlayGame()
         {
             _playGameCanvas.enabled = !_playGameCanvas.enabled;
             _player.SetActive(true);
             _mainMenuCanvas.enabled = false;
             _gameManager.StartGame();
         }
-        public void ShowShop()
+        private void ShowShop()
         {
             _shopCanvas.enabled = !_shopCanvas.enabled;
         }
