@@ -8,21 +8,18 @@ namespace Assets.Scripts.UIManagers
 {
     public class ShopMenu : MonoBehaviour
     {
-        public int Price => _price;
-
         [SerializeField] private DataManager _dataManager;
         [SerializeField] private GameManager _gameManager;
         [SerializeField] private Canvas _shopMenuCanvas;
         [SerializeField] private Button _closeShopMenu;
-        [SerializeField] private Button _buyButton;
+        //[SerializeField] private Button _buyButton;
 
         [SerializeField] private ShopUIItem[] _shopUIItems;
-
-        private int _price;
 
         private void Awake()
         {
             _dataManager.DataLodedAction += OnDataLoaded;
+
             for (int i = 0; i < _shopUIItems.Length; i++)
             {
                 _shopUIItems[i].BoughtItemAction += OnItemBought;
@@ -37,7 +34,7 @@ namespace Assets.Scripts.UIManagers
 
         private void OnItemBought(ColorType colorType, int price, Action callBack)
         {
-            if (_dataManager.HasCurrency(price))
+            if (_dataManager.HasCurrency(price) == true)
             {
                 _gameManager.SetColor(colorType);
                 _dataManager.SubCurrency(price);

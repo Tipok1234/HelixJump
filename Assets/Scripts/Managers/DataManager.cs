@@ -32,7 +32,7 @@ namespace Assets.Scripts.Managers
             _playerProfile = SaveManager.Load<PlayerProfile>(_saveKey);
 
             _currentLevelIndex = PlayerPrefs.GetInt(_currentLevelKey, 0);
-            _currency = PlayerPrefs.GetInt(_currencyKey, 0);
+            _currency = PlayerPrefs.GetInt(_currencyKey, 1000000);
 
             DataLodedAction?.Invoke(_playerProfile);
             CurrencyUpdatedAction?.Invoke(_currency);
@@ -40,7 +40,7 @@ namespace Assets.Scripts.Managers
         }
         public bool HasCurrency(int amount)
         {
-            if (PlayerPrefs.GetInt(_currencyKey, 0) >= amount)
+            if (PlayerPrefs.GetInt(_currencyKey, _currency) >= amount)
             {
                 return true;
             }
@@ -48,14 +48,14 @@ namespace Assets.Scripts.Managers
         }
         public void SubCurrency(int amount)
         {
-            int result = PlayerPrefs.GetInt(_currencyKey, 0) - amount;
+            int result = PlayerPrefs.GetInt(_currencyKey, _currency) - amount;
             PlayerPrefs.SetInt(_currencyKey, result);
             CurrencyUpdatedAction?.Invoke(result);
         }
 
         public void AddCurrency(int amount)
         {
-            int result = PlayerPrefs.GetInt(_currencyKey, 0) + amount;
+            int result = PlayerPrefs.GetInt(_currencyKey, _currency) + amount;
             PlayerPrefs.SetInt(_currencyKey, result);
             CurrencyUpdatedAction?.Invoke(result);
         }

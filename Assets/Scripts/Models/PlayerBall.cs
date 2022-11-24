@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using Assets.Scripts.Enums;
 using Assets.Scripts.Managers;
+using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.Models
 {
@@ -18,11 +19,6 @@ namespace Assets.Scripts.Models
 
         private Vector3 posBall = new Vector3(0, 1.6f, -1.95f);
 
-        private void OnMouseDown()
-        {
-            float mouseX = Input.GetAxisRaw("Mouse X");
-            transform.Rotate(0, -mouseX * 400 * Time.deltaTime, 0);
-        }
         private void OnCollisionEnter(Collision collision)
         {
             _playerBallRB.velocity = new Vector3(_playerBallRB.velocity.x, _jumpForce, _playerBallRB.velocity.z);

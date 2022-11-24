@@ -1,6 +1,6 @@
 using UnityEngine;
 using Assets.Scripts.Models;
-
+using UnityEngine.EventSystems;
 namespace Assets.Scripts.Controllers
 {
     public class LevelGenerator : MonoBehaviour
@@ -14,10 +14,6 @@ namespace Assets.Scripts.Controllers
         private GameObject[] _go;
         private int _numberHelix;
 
-        private void Update()
-        {
-          //  gameObject.transform.Rotate(0, _rotationHelix * Time.deltaTime, 0);
-        }
         public void PrepareLevel(int floorCount)
         {
             _ySpawn = 0f;
@@ -30,7 +26,7 @@ namespace Assets.Scripts.Controllers
             {
                 SpawnHelix(Random.Range(1, _helixGeneration.Length - 1), i);
             }
-           SpawnHelix(_helixGeneration.Length - 1, floorCount - 1);
+            SpawnHelix(_helixGeneration.Length - 1, floorCount - 1);
         }
 
         private void SpawnHelix(int helixIndex, int i)
